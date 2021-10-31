@@ -1,0 +1,15 @@
+entero Asdf = 10.
+entero B1 = 11 + 1.
+cadena Cjj = saturno. 
+
+mientras Af < B 
+[
+	si A < B 
+	[
+		A = A + B. 
+	].
+].
+
+cadena Casdf = 1.
+ASdf10 = 4 + 4.
+

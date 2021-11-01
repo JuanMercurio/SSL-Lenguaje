@@ -18,9 +18,11 @@ CFLAGS = -lfl -ly
 
 # ===========================================================
 
-all: $(BISONCFILE) $(LEXCFILE) 
-	gcc $(LEXCFILE) $(BISONCFILE) $(CFLAGS) -o $(BINARY) 
+all: $(BINARY)
 
+$(BINARY): $(BISONCFILE) $(LEXCFILE) 
+	gcc $(LEXCFILE) $(BISONCFILE) $(CFLAGS) -o $(BINARY) 
+	
 $(LEXCFILE): $(SCANNER)
 	@flex -o $(LEXCFILE) $(SCANNER)
 

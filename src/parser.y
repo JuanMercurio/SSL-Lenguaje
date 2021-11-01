@@ -1,13 +1,18 @@
 
 %{
 
+#include <string.h>
 #include <stdio.h>
 
 extern FILE * yyin;
 extern int yylineno;
 extern int yylex();
+extern int columnas;
+extern int linea_en_bytes;
 
-int yyerror(char *s);
+#define YYERROR_VERBOSE 1
+
+void yyerror(const char *s);
 
 %}
 
@@ -67,14 +72,34 @@ int main(int argc, char **argv)
 
 {
 	yyin = fopen(argv[1], "r");
-	printf("\n");
 	yylex();
 	yyparse();
+	fclose(yyin);
 }
 
-int yyerror(char *s)
+void yyerror(const char *s)
 {
-	  fprintf(stderr, "error: %s \n", s);
-	  printf("Error in line: %d \n", yylineno);
-	 
+	
+	printf("\n");
+	printf("Error in line: %d \n", yylineno);
+
+	printf("\n");
+	fprintf(stderr, "%s:\n", s);
+	
+	char* buffer = malloc(100);
+	fseek(yyin, linea_en_bytes, SEEK_SET);
+		
+	int tamanio; 
+	fgets(buffer, 100, yyin);
+
+	printf("\n");
+	printf("  %s", buffer);
+	printf("  ");
+
+	for(int i=0; i<columnas-2; i++){
+		printf("_");
+	}
+		printf("^ \n");
+
+	printf("\n");
 }

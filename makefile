@@ -1,30 +1,38 @@
-BIN = Parser 
-LEXOUTPUTFILE = lex.c
-SCANNER = scanner.l
-PARSER = parser.y
-OUTPUTFILE = output.txt 
-INPUTFILE = prueba.lenguaje 
-BISONOUTPUTFILE = parser.tab.c
 
-all: $(BIN) 
+# Files 
+BINARY     = parser 
+BISONCFILE = $(GENDIR)/parser.c
+BISONHFILE = $(GENDIR)/parser.h
+LEXCFILE   = $(GENDIR)/lex.c
+PARSER     = $(SRCDIR)/parser.y
+SCANNER    = $(SRCDIR)/scanner.l
 
-run: $(BIN)
-	@echo
-	@rm -fr $(BISONOUTPUTFILE) $(LEXOUTPUTFILE) parser.tab.h
-	./$(BIN) $(INPUTFILE) 
-	@echo
+# Directories
+SRCDIR=src
+BINDIR=bin
+GENDIR=.gen
+
+# Compiler options
+CC = gcc
+CFLAGS = -lfl -ly
+
+# ===========================================================
+
+all: $(BISONCFILE) $(LEXCFILE) 
+	gcc $(LEXCFILE) $(BISONCFILE) $(CFLAGS) -o $(BINARY) 
+
+$(LEXCFILE): $(SCANNER)
+	@flex -o $(LEXCFILE) $(SCANNER)
+
+$(BISONCFILE):$(PARSER) $(GENDIR)
+	@bison -d $(PARSER) -o $(BISONCFILE) 
+
+$(GENDIR):
+	mkdir $(GENDIR) 
 
 clean: 
-	rm -fr $(BIN) $(BISONOUTPUTFILE) $(LEXOUTPUTFILE) parser.tab.h
+	rm -fr $(GENDIR) $(BINARY)
 
-$(BIN): $(LEXOUTPUTFILE) $(BISONOUTPUTFILE)
-	@echo
-	gcc $(LEXOUTPUTFILE) $(BISONOUTPUTFILE) -lfl -ly -o $(BIN) 
-
-$(LEXOUTPUTFILE): $(SCANNER)
-	@flex -o $(LEXOUTPUTFILE) $(SCANNER)
-
-$(BISONOUTPUTFILE):$(PARSER)
-	@bison -d $(PARSER)
 .PHONY: all clean
+
 

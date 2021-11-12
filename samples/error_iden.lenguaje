@@ -1,0 +1,8 @@
+cadena NombreOkey = asdf.
+
+mientras 3 > Variable 
+[
+	Variable = Variable + 1.
+].
+
+entero EsteNombreEsMuyGrande = 3.

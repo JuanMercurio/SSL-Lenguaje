@@ -1,0 +1,28 @@
+
+cadena Cadena1 = hola.
+cadena Cadena2 = chau.
+cadena Cadena4 = hola.
+cadena Cadena5 = asdf.
+
+entero A = 100.
+entero B = 200.
+
+mientras A > B
+[
+	A = A - B.
+].
+
+entero Variable1 = 123.
+entero Variable2 = 123.
+entero Variable3 = 123.
+entero Variable4 = 123.
+entero Variable5 = 123.
+entero Variable7 = 123.
+entero Variable6 = 123.
+entero Variable10 = 123.
+
+
+si A = B 
+[
+	A = -1'.
+].

@@ -80,6 +80,6 @@ mientras  "mientras"
 
 void error_identificadores(){	
 	printf("\"%s\" no puede ser usado como identificador \n", yytext); 
-	printf("Recordar que los identificadores deben tener como maximo 16 caracteres \n");
+	printf("Recordar que los identificadores deben tener como maximo 16 caracteres y deben empezar con Mayuscula\n");
 	printf("\n");
  }

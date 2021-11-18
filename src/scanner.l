@@ -11,6 +11,7 @@
 #define COLUMNAS_RESET columnas = 1;
 #define LINEA_BYTES linea_en_bytes += bytes; bytes = 0;
 
+void error_alfabeto();
 void error_identificadores();
 int columnas = 0;
 int bytes = 0;
@@ -73,7 +74,7 @@ mientras  "mientras"
 "["		   		          { COLUMNAS_SUMA; return CORCHIZQ; }
 "]"						  { COLUMNAS_SUMA; return CORCHDER; }
 
-.						  { COLUMNAS_SUMA; return ERROR; }
+.						  { COLUMNAS_SUMA; error_alfabeto(); }
 
 %%
 
@@ -83,3 +84,9 @@ void error_identificadores(){
 	printf("Recordar que los identificadores deben tener como maximo 16 caracteres y deben empezar con Mayuscula\n");
 	printf("\n");
  }
+
+void error_alfabeto(){
+	printf("\n");
+	printf("Error en linea: %d \n", yylineno);
+	printf("\"%s\" no pertece al alfabeto del lenguaje de programacion\n\n", yytext);
+}
